@@ -1,6 +1,6 @@
 <img src=".assets/judge.jpg" alt="Justice image" style="width: 400px;" align="right">
 
-# judge
+# judge 🧑‍⚖️
 🧑‍⚖️ Judge verifies that system settings meet required configurations and resource specifications 🧑‍⚖️
 
 ## How it works
