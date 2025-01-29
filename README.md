@@ -11,14 +11,56 @@ validation of the environment.
 It communicates to `hery` to get the entities. Once it hits the `judge` entity in the `_meta` then it pulls the script
 or application to the plugins directory and then runs it. And prints the result in a standard cli table.
 
+## Auditor
+The auditor only gets the content to make the evaluation. Judge can handle the full entity to extract the entities the
+different auditor need.
+
+Example of what an auditor can receive (it can be YAML or JSON):
+```yaml
+- _entity: github.com/AmadlaOrg/Entity@v1.0.0
+  _body:
+    name: htop
+    which: $PATH
+    exec:
+      command: htop
+      version: htop --version
+      help: htop --help
+    lay:
+      name: htop
+```
+
+OR
+
+```json
+[
+  {
+    "_entity": "github.com/AmadlaOrg/EntityApplication@v1.0.0",
+    "_body": {
+      "name": "htop",
+      "which": "$PATH",
+      "exec": {
+        "command": "htop",
+        "version": "htop --version",
+        "help": "htop --help"
+      },
+      "lay": {
+        "name": "htop"
+      }
+    }
+  }
+]
+```
+
+This format permits the streaming of the data. This makes it less heavy on memory.
+
 ### Help
 ```bash
 judge --help|-h
 ```
 
-### List evaluators
+### List auditor
 ```bash
-judge --evaluators|-e
+judge --auditor|-e
 ```
 
 ### Run
