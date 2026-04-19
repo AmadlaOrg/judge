@@ -2,37 +2,31 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/AmadlaOrg/judge/cmd"
 	"github.com/spf13/cobra"
-	"log"
 )
 
-const appName = "judge"
-const appTitleName = "judge"
-const version = "1.0.0"
+const (
+	appName = "judge"
+	version = "1.0.0"
+)
 
 var rootCmd = &cobra.Command{
 	Use:     appName,
-	Short:   appTitleName + " CLI application",
+	Short:   "Validation and audit CLI with judge-* plugins",
 	Version: version,
 }
 
-var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Print the version number of " + appName,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(appName + " version " + version)
-	},
-}
-
 func init() {
-	rootCmd.AddCommand(versionCmd)
-	rootCmd.AddCommand(cmd.SettingsCmd)
+	rootCmd.AddCommand(cmd.RunCmd)
+	rootCmd.AddCommand(cmd.PluginsCmd)
 }
 
 func main() {
 	if err := rootCmd.Execute(); err != nil {
-		log.Fatal(err)
-		//os.Exit(1)
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
 	}
 }
